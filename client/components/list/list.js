@@ -12,6 +12,7 @@ export default function List(props) {
                 <h3>
                   <b>{indicador.nombre ? indicador.nombre : null}</b>
                 </h3>
+                <br />
                 <p>
                   <b>Fecha: </b>
                   {indicador.fecha ? DateFormat(indicador.fecha) : null}
@@ -30,9 +31,7 @@ export default function List(props) {
             );
           })
         ) : (
-          <p>
-            Hubo un error en la búsqueda, por favor intente recargar la página.
-          </p>
+          <p>Hubo un error en la búsqueda, por favor recargue la página.</p>
         )}
       </div>
     );

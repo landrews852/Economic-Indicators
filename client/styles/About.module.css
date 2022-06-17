@@ -1,0 +1,41 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    padding: 20px 0;
+}
+
+.image {
+    margin: 0 20px;
+}
+ 
+.text_container {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.title {
+    margin: 10px 20px;
+}
+
+.description {
+    margin: 10px 20px;
+}
+
+@media screen and (max-width: 600px) {
+    .wrapper {
+        flex-direction: column-reverse;
+    }
+    
+    .text_container {
+        text-align: center;
+    }
+
+    .image {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}

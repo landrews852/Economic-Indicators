@@ -1,0 +1,13 @@
+.navbar {
+    position: sticky;
+    top: 0;
+}
+
+.navbar_margin {
+    margin-bottom: 2px;
+}
+
+.link {
+    color: #ffffff;
+    text-decoration: none;
+}

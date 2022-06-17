@@ -11,6 +11,7 @@ export default function Indicators() {
     date: "",
   });
   const [disabledDate, setDisabledDate] = useState(true);
+  const [lateMsg, setLateMsg] = useState(false);
   const { indicators, loading, error } = useIndicatorsFetch(state);
 
   const today = () => DateFormat(new Date());
@@ -37,11 +38,13 @@ export default function Indicators() {
   };
 
   useEffect(() => {
-    if (state.code === "") {
-      setDisabledDate(true);
-    } else {
-      setDisabledDate(false);
-    }
+    if (loading) setTimeout(() => setLateMsg(true), 6000);
+    setLateMsg(false);
+  }, [loading]);
+
+  useEffect(() => {
+    if (state.code === "") setDisabledDate(true);
+    else setDisabledDate(false);
   }, [state]);
 
   if (loading)
@@ -53,16 +56,22 @@ export default function Indicators() {
           width={100}
           height={100}
         />
+        {lateMsg ? (
+          <p>
+            Está demorando más de lo normal, por favor espere o recargue la
+            página.
+          </p>
+        ) : null}
       </div>
     );
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Indicadores</h1>
-      <div>
+      <div className={styles.form_container}>
         <div className={styles.form}>
           <div className={styles.code}>
-            <label className="label">Selecciona un indicador: </label>
+            <label className={styles.label}>Selecciona un indicador: </label>
             <select
               className={styles.select}
               name="code"
@@ -86,7 +95,14 @@ export default function Indicators() {
             </select>
           </div>
           <div className={styles.date}>
-            <label className={styles.label}>Selecciona una fecha: </label>
+            <label className={styles.label}>
+              Selecciona una fecha:{" "}
+              {disabledDate ? (
+                <span className={styles.disabled}>
+                  (Elige un indicador primero)
+                </span>
+              ) : null}
+            </label>
             <input
               disabled={disabledDate}
               type="date"
